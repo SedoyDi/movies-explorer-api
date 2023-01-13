@@ -17,7 +17,6 @@ const userSchema = new mongoose.Schema({
     required: [true, fillField],
     minlength: [2, lengthFieldMin],
     maxlength: [30, lengthFieldMax],
-    default: 'Киноман',
   },
   email: {
     type: String,
@@ -32,7 +31,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     select: false,
-    minlenght: 8,
   },
 }, { versionKey: false });
 

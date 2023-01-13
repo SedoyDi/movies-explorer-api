@@ -31,18 +31,12 @@ const validatUser = celebrate({
   }),
 });
 
-const validatIdUser = celebrate({
-  params: Joi.object().keys({
-    userId: Joi.string().alphanum().length(24).hex(),
-  }),
-});
-
 const validatMovie = celebrate({
   body: Joi.object().keys({
     country: Joi.string().required(),
     director: Joi.string().required(),
     duration: Joi.number().required(),
-    year: Joi.number().required(),
+    year: Joi.string().required(),
     description: Joi.string().required(),
     image: Joi.string().custom(validateUrl),
     trailerLink: Joi.string().custom(validateUrl),
@@ -63,7 +57,6 @@ module.exports = {
   validatAuth,
   validatReg,
   validatUser,
-  validatIdUser,
   validatMovie,
   validatIdMovie,
 };
