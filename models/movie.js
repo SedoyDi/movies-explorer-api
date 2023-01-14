@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { isUrl } = require('validator');
+const { isURL } = require('validator');
 const {
   urlError,
 } = require('../utils/eroorMessage');
@@ -18,7 +18,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   year: {
-    type: Number,
+    type: String,
     required: true,
   },
   description: {
@@ -29,7 +29,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (url) => isUrl(url),
+      validator: (url) => isURL(url),
       message: urlError,
     },
   },
@@ -37,7 +37,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (url) => isUrl(url),
+      validator: (url) => isURL(url),
       message: urlError,
     },
   },
@@ -45,7 +45,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (url) => isUrl(url),
+      validator: (url) => isURL(url),
       message: urlError,
     },
   },

@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
@@ -12,6 +13,7 @@ const apiRequestLimiter = require('./middlewares/apiRequestLimiter');
 const { PORT = 3000, DB_ADRESS = 'mongodb://localhost:27017/moviesdb' } = process.env;
 const app = express();
 
+app.use(helmet());
 app.use(requestLogger);
 app.use(apiRequestLimiter);
 app.use(cors());
