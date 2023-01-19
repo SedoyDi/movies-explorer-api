@@ -7,7 +7,7 @@ const {
   filmNotFound,
   cannotDelete,
   deletedMovie,
-} = require('../utils/eroorMessage');
+} = require('../utils/constants');
 
 module.exports.getMovies = (req, res, next) => {
   Movie.find({ owner: req.user._id })
@@ -16,55 +16,38 @@ module.exports.getMovies = (req, res, next) => {
 };
 
 module.exports.createMovie = (req, res, next) => {
-  const {
-    country,
-    director,
-    duration,
-    year,
-    description,
-    image,
-    trailerLink,
-    thumbnail,
-    movieId,
-    nameRU,
-    nameEN,
-  } = req.body;
   const owner = req.user._id;
-  Movie.create({
-    country,
-    director,
-    duration,
-    year,
-    description,
-    image,
-    trailerLink,
-    thumbnail,
-    movieId,
-    nameRU,
-    nameEN,
-    owner,
-  })
-    .then((movie) => res.status(201).send({ movie }))
+
+  Movie.create({ owner, ...req.body })
+    .then((movie) => {
+      res.status(201).send({ data: movie });
+    })
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new IncorrectReqvestError(validationError));
       } else {
         next(err);
       }
-    });
+    })
+    .catch(next);
 };
 
 module.exports.deleteMovie = (req, res, next) => {
-  Movie.findById(req.params.movieId)
+  const owner = req.user._id;
+  const { movieId } = req.params;
+
+  Movie.findById(movieId)
     .then((movie) => {
       if (!movie) {
         throw new NotFoundError(filmNotFound);
       }
-      if (movie.owner.toString() !== req.user._id.toString()) {
+      if (movie.owner.toString() !== owner) {
         throw new AccessError(cannotDelete);
+      } else {
+        Movie.findByIdAndDelete(movieId)
+          .then(() => res.status(200).send({ message: deletedMovie }))
+          .catch(next);
       }
-      return movie.remove()
-        .then(() => res.status(200).send({ message: deletedMovie }));
     })
     .catch(next);
 };

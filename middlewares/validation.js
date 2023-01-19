@@ -1,10 +1,11 @@
 const { celebrate, Joi } = require('celebrate');
 const { isURL } = require('validator');
+const urlError = require('../utils/constants');
 
 const validateUrl = ((value) => {
   const result = isURL(value);
   if (!result) {
-    throw new Error('URL validation err');
+    throw new Error(urlError);
   }
   return value;
 });

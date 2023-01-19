@@ -8,24 +8,33 @@ const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const routes = require('./routes');
 const mainErrorHandler = require('./middlewares/mainErrorHandler');
-const apiRequestLimiter = require('./middlewares/apiRequestLimiter');
+const { rateLimiter } = require('./middlewares/rateLimiter');
 
-const { PORT = 3000, DB_ADRESS = 'mongodb://localhost:27017/moviesdb' } = process.env;
+const {
+  MONGO_DB_ADDRESS,
+  PORT_NUMBER,
+  ALLOWED_CORS,
+} = require('./utils/constants');
+
 const app = express();
+app.use(cors({
+  origin: ALLOWED_CORS,
+}));
 
-app.use(helmet());
-app.use(requestLogger);
-app.use(apiRequestLimiter);
-app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+const { PORT = PORT_NUMBER } = process.env;
 
-mongoose.connect(DB_ADRESS, {
+mongoose.connect(MONGO_DB_ADDRESS, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
   .then(() => console.log('connected'))
   .catch((err) => console.log(`Ошибка ${err.name}: ${err.message}`));
+
+app.use(requestLogger);
+app.use(helmet());
+app.use(rateLimiter);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
   console.log(`${req.method}: ${req.path} ${JSON.stringify(req.body)}`);

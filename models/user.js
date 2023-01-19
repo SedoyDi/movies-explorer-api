@@ -9,7 +9,7 @@ const {
   lengthFieldMin,
   lengthFieldMax,
   unauthError,
-} = require('../utils/eroorMessage');
+} = require('../utils/constants');
 
 const userSchema = new mongoose.Schema({
   name: {

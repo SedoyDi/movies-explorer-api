@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { isURL } = require('validator');
 const {
   urlError,
-} = require('../utils/eroorMessage');
+} = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
   country: {

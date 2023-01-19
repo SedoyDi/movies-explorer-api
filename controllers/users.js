@@ -8,7 +8,7 @@ const {
   validationError,
   notFoundUser,
   existUserAlready,
-} = require('../utils/eroorMessage');
+} = require('../utils/constants');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 

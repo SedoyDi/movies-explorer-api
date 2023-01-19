@@ -5,7 +5,7 @@ const movieRouter = require('./movies');
 const { validatAuth, validatReg } = require('../middlewares/validation');
 const { login, createUser } = require('../controllers/users');
 const AuthError = require('../errors/authError');
-const { neededAutorisation } = require('../utils/eroorMessage');
+const { neededAutorisation } = require('../utils/constants');
 
 router.post('/signin', validatAuth, login);
 router.post('/signup', validatReg, createUser);

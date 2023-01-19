@@ -6,7 +6,7 @@ const AuthError = require('../errors/authError');
 
 const {
   neededAutorisation,
-} = require('../utils/errorMessage');
+} = require('../utils/constants');
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
