@@ -2,7 +2,7 @@
 
 ## Серверная часть
 ```
-https://api.diploma.sedov.d.s.nomoredomains.rocks
+https://diploma.sedov.d.s.nomoredomains.rocks
 ```
 
 ## Директории
@@ -16,7 +16,7 @@ https://api.diploma.sedov.d.s.nomoredomains.rocks
 
 ## О проекте
 
-ссылка на страницу: https://api.diploma.sedov.d.s.nomoredomains.rocks
+ссылка на страницу: https://diploma.sedov.d.s.nomoredomains.rocks
 
 Создание серверной части дипломного проекта.
 В работе использовались:
