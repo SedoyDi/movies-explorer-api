@@ -11,7 +11,6 @@ const mainErrorHandler = require('./middlewares/mainErrorHandler');
 const { rateLimiter } = require('./middlewares/rateLimiter');
 
 const {
-  MONGO_DB_ADDRESS,
   PORT_NUMBER,
   ALLOWED_CORS,
 } = require('./utils/constants');
@@ -21,9 +20,9 @@ app.use(cors({
   origin: ALLOWED_CORS,
 }));
 
-const { PORT = PORT_NUMBER } = process.env;
+const { PORT = PORT_NUMBER, NODE_ENV, MONGO_URL } = process.env;
 
-mongoose.connect(MONGO_DB_ADDRESS, {
+mongoose.connect(NODE_ENV === 'production' ? MONGO_URL : 'mongodb://localhost:27017/bitfilmsdb', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })

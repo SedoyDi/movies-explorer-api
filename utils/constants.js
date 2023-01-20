@@ -15,10 +15,9 @@ const unauthError = 'Неправильные почта или пароль';
 const urlError = 'Ссылка указана неверно';
 const manyRequest = 'Превышен лимит запросов';
 
-const MONGO_DB_ADDRESS = 'mongodb://localhost:27017/moviesdb';
-const PORT_NUMBER = 3000;
+const PORT_NUMBER = 3001;
 const ALLOWED_CORS = [
-  'http://localhost:3001',
+  'http://localhost:3001/',
   'diploma.sedov.d.s.nomoredomains.rocks',
   'api.diploma.sedov.d.s.nomoredomains.rocks',
 ];
@@ -40,7 +39,6 @@ module.exports = {
   unauthError,
   urlError,
   manyRequest,
-  MONGO_DB_ADDRESS,
   PORT_NUMBER,
   ALLOWED_CORS,
 };
