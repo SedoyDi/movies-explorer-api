@@ -16,11 +16,6 @@ const urlError = 'Ссылка указана неверно';
 const manyRequest = 'Превышен лимит запросов';
 
 const PORT_NUMBER = 3001;
-const ALLOWED_CORS = [
-  'http://localhost:3001',
-  'diploma.sedov.d.s.nomoredomains.rocks',
-  'api.diploma.sedov.d.s.nomoredomains.rocks',
-];
 
 module.exports = {
   validationError,
@@ -40,5 +35,4 @@ module.exports = {
   urlError,
   manyRequest,
   PORT_NUMBER,
-  ALLOWED_CORS,
 };

@@ -9,16 +9,11 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const routes = require('./routes');
 const mainErrorHandler = require('./middlewares/mainErrorHandler');
 const { rateLimiter } = require('./middlewares/rateLimiter');
-
-const {
-  PORT_NUMBER,
-  ALLOWED_CORS,
-} = require('./utils/constants');
+const corsOptions = require('./utils/corsOptions');
+const { PORT_NUMBER } = require('./utils/constants');
 
 const app = express();
-app.use(cors({
-  origin: ALLOWED_CORS,
-}));
+app.use(cors(corsOptions));
 
 const { PORT = PORT_NUMBER, NODE_ENV, MONGO_URL } = process.env;
 
